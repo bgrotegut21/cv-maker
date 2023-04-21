@@ -1,0 +1,94 @@
+.Navigation {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  background: rgb(48, 48, 48);
+  color: white;
+}
+
+.themeNav {
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  height: 30px;
+  width: 30px;
+  margin: 10px;
+
+  filter: invert(99%) sepia(1%) saturate(2%) hue-rotate(257deg) brightness(113%)
+    contrast(100%);
+}
+
+.topNav {
+  display: flex;
+  height: 80px;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.titleText {
+  line-height: 30px;
+  font-size: xx-large;
+}
+
+.titleText {
+  font-family: 'Roboto', sans-serif;
+}
+
+.editText {
+  font-family: 'Roboto', sans-serif;
+
+  margin: 10px;
+}
+
+.bottomNav {
+  height: 220px;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 400px) {
+  .Navigation {
+    height: 350px;
+  }
+
+  .topNav {
+    height: 150px;
+    flex-direction: column;
+  }
+  .bottomNav {
+    height: 200px;
+  }
+
+  .editText {
+    font-size: medium;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .editText {
+    font-size: x-small;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .bottomNav {
+    flex-direction: column;
+  }
+
+  .editText {
+    font-size: large;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .Navigation {
+    height: 150px;
+    justify-content: center;
+  }
+}
