@@ -1,0 +1,9 @@
+.Postview {
+  background: white;
+  width: 830px;
+  height: 1100px;
+}
+.emptyH2 {
+  opacity: 0;
+  cursor: default;
+}

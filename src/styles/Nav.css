@@ -52,6 +52,13 @@
   justify-content: center;
 }
 
+.View {
+  display: flex;
+  background: rgb(48, 48, 48);
+
+  justify-content: center;
+}
+
 @media screen and (max-width: 400px) {
   .Navigation {
     height: 350px;
@@ -86,7 +93,7 @@
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1270px) {
   .Navigation {
     height: 150px;
     justify-content: center;
