@@ -15,7 +15,7 @@
   background: rgb(60, 59, 59);
 }
 
-.addButton {
+.buttonStyle {
   border: none;
   background: grey;
   color: white;
@@ -42,10 +42,48 @@
   cursor: pointer;
 }
 
-@media screen and (min-width: 1270px) {
+.deleteButton-Light {
+  color: black;
+}
+
+.dataBox-Light {
+  background: rgb(199, 196, 196);
+}
+.titleDataText-Light {
+  color: black;
+}
+
+.addButton-Light {
+  background: rgb(238, 238, 238);
+  color: black;
+}
+
+@media screen and (min-width: 1200px) {
   .Preview {
     overflow-y: auto;
-    max-height: 1100px;
-    width: 400px;
+    height: 900px;
+    width: 500px;
+  }
+
+  .dataBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .deleteDiv {
+    align-self: flex-end;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .dataBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .deleteDiv {
+    align-self: flex-end;
   }
 }

@@ -1,16 +1,12 @@
 import React from 'react';
-import { formatTitle, removeSpaces, replaceUnderscores } from './utilities.js';
+import { formatTitle, replaceUnderscores } from '../scripts/utilities.js';
 import '../styles/Preview.css';
 
 import TextInput from './TextInput.js';
 
 class Preview extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   createInputElements(inputObjectDataKeys, inputObject, title, index) {
-    const { changeDataState, viewDataState } = this.props;
+    const { changeDataState, viewDataState, lightmodeClassName } = this.props;
 
     return inputObjectDataKeys.map((inputItemKey) => {
       const inputItem = inputObject.data[inputItemKey];
@@ -22,16 +18,16 @@ class Preview extends React.Component {
           placeholder={replaceUnderscores(inputItemKey)}
           isLarge={inputItem.isLarge}
           key={inputItem.id}
+          lightmodeClassName={lightmodeClassName}
         />
       );
     });
   }
 
   getDataElements() {
-    const { data, addDataState, deleteDataState } = this.props;
+    const { data, addDataState, deleteDataState, lightmodeClassName } =
+      this.props;
     const dataTitles = Object.keys(data);
-
-    // console.log(dataTitles, 'the current data titles');
 
     return dataTitles.map((title) => {
       let index = -1;
@@ -41,27 +37,33 @@ class Preview extends React.Component {
 
       return (
         <div key={dataid} className={title}>
-          <h2 className="titleDataText">{formatTitle(title)}</h2>
+          <h2 className={`titleDataText titleDataText-${lightmodeClassName}`}>
+            {formatTitle(title)}
+          </h2>
           <div>
             {dataArray.length === 0 && (
-              <button className="addButton" onClick={addDataState(title)}>
+              <button
+                className={`buttonStyle addButton-${lightmodeClassName}`}
+                onClick={addDataState(title)}
+              >
                 Add
               </button>
             )}
 
             {dataArray.map((inputObject) => {
-              // console.log(inputObject.data, 'the input object');
-
               const inputObjectDataKeys = Object.keys(inputObject.data);
               index += 1;
 
               return (
-                <div key={inputObject.id} className="dataBox">
+                <div
+                  key={inputObject.id}
+                  className={`dataBox dataBox-${lightmodeClassName}`}
+                >
                   {title !== 'Personal_Information' && (
                     <div className="deleteDiv">
                       <button
                         onClick={deleteDataState(title, inputObject.id)}
-                        className="deleteButton"
+                        className={`deleteButton deleteButton-${lightmodeClassName}`}
                       >
                         X
                       </button>
@@ -78,7 +80,7 @@ class Preview extends React.Component {
                   {index === dataArrayEndIndex &&
                     title !== 'Personal_Information' && (
                       <button
-                        className="addButton"
+                        className={`buttonStyle addButton-${lightmodeClassName}`}
                         onClick={addDataState(title)}
                       >
                         Add

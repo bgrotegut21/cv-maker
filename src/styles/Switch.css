@@ -7,7 +7,7 @@
   border-radius: 30px;
 }
 
-.switch-large {
+.switchlarge {
   width: 180px;
   height: 60px;
   border-radius: 60px;
@@ -44,6 +44,13 @@
   border-radius: 60px;
 }
 
+.Switch-Light {
+  border: 3px solid black;
+}
+
+.switchBallLight {
+  background: black;
+}
 /* ANIMATIONS */
 
 .switchball-enter {

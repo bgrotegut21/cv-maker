@@ -1,9 +1,168 @@
-.Postview {
-  background: white;
-  width: 830px;
-  height: 1100px;
+.resumeHolder {
+  background: rgb(60, 59, 59);
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  border-radius: 30px;
 }
+.resume {
+  width: 572px;
+  min-height: 740px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
 .emptyH2 {
   opacity: 0;
   cursor: default;
+}
+
+.header {
+  /* background: red; */
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-top: 40px;
+
+  padding-bottom: 20px;
+
+  text-align: left;
+  border-bottom: 3px solid rgb(12, 112, 205);
+}
+
+.resumeInfo {
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+
+.aboutusDescription {
+  margin: 0;
+}
+
+.descriptionText,
+.resumeText {
+  font-size: small;
+}
+
+.ResumeNameTitle {
+  font-size: xx-large;
+  color: rgb(12, 112, 205);
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.head {
+  display: flex;
+  /* background: violet; */
+  justify-content: space-between;
+  text-align: left;
+  flex-direction: row;
+}
+
+.resumeIcons {
+  /* background: yellow; */
+  width: 150px;
+}
+
+.resumeimg {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  /* background: blue; */
+}
+
+.resumeIcon {
+  /* background: pink; */
+  align-items: center;
+  display: flex;
+}
+
+.titleInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.descriptionInfo {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.resumeHolder-Light {
+  background: rgb(199, 196, 196);
+}
+
+/* BEGINING OF RESUME INFO  CSS */
+
+.Description {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.resumeInfo {
+  text-align: left;
+}
+
+.titleInfo {
+  flex-wrap: wrap;
+}
+
+.descriptionTitle {
+  font-size: medium;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin: 0;
+}
+
+.resumeInfoTitle {
+  color: rgb(12, 112, 205);
+}
+
+.descriptionLabel {
+  font-size: medium;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.buttonHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 80px;
+}
+
+.printButton {
+  background: rgb(12, 112, 205);
+  width: 150px;
+  height: 50px;
+  border-radius: 100px;
+}
+
+.resumeInfoText {
+  margin: 0;
+}
+
+@media screen and (min-width: 1200px) {
+  .resume {
+    width: 816px;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .head {
+    flex-wrap: wrap;
+  }
+  .resume {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .resume {
+    width: 200px;
+  }
 }

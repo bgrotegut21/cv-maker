@@ -59,6 +59,20 @@
   justify-content: center;
 }
 
+.View-Light {
+  background: rgb(220, 216, 216);
+}
+
+.Navigation-Light {
+  background: rgb(220, 216, 216);
+  color: black;
+}
+
+.icon-Light {
+  filter: invert(0%) sepia(81%) saturate(7500%) hue-rotate(242deg)
+    brightness(85%) contrast(91%);
+}
+
 @media screen and (max-width: 400px) {
   .Navigation {
     height: 350px;
@@ -93,7 +107,7 @@
   }
 }
 
-@media screen and (min-width: 1270px) {
+@media screen and (min-width: 1200px) {
   .Navigation {
     height: 150px;
     justify-content: center;

@@ -22,32 +22,57 @@ class Switch extends React.Component {
     });
   }
 
+  changeLightMode() {
+    const { lightmodeClassName } = this.props;
+
+    if (this.nodeRef.current !== null) {
+      if (lightmodeClassName === 'Light')
+        this.nodeRef.current.style.backgroundColor = 'black';
+      else this.nodeRef.current.style.backgroundColor = 'white';
+    }
+  }
+
   changeTriggerToFalse() {
-    this.setState({
-      trigger: false,
-    });
+    this.setState(
+      {
+        trigger: false,
+      },
+      () => {
+        this.props.fireTriggerOnTrue();
+      }
+    );
   }
 
   changeTriggerToTrue() {
-    this.setState({
-      trigger: true,
-    });
+    this.setState(
+      {
+        trigger: true,
+      },
+      () => {
+        this.props.fireTriggerOnFalse();
+      }
+    );
   }
 
   render() {
-    const { size } = this.props;
+    const { size, lightmodeClassName } = this.props;
+
     const { triggerAnimation } = this.state;
 
     let switchClassNamesArray = ['', '', ''];
 
     if (size === 'large') {
-      switchClassNamesArray[0] = 'switch-large';
+      switchClassNamesArray[0] = 'switchlarge';
       switchClassNamesArray[1] = 'switchbuttonlarge';
       switchClassNamesArray[2] = 'switchballLarge';
     }
 
+    this.changeLightMode();
+
     return (
-      <div className={`Switch ${switchClassNamesArray[0]}`}>
+      <div
+        className={`Switch ${switchClassNamesArray[0]} Switch-${lightmodeClassName}`}
+      >
         <div
           onClick={this.changeSwitch}
           className={`switchbutton ${switchClassNamesArray[1]}`}
@@ -63,12 +88,17 @@ class Switch extends React.Component {
         >
           <div
             ref={this.nodeRef}
-            className={`switchball  ${switchClassNamesArray[2]}`}
+            className={`switchball  ${switchClassNamesArray[2]}  `}
           ></div>
         </CSSTransition>
       </div>
     );
   }
 }
+
+Switch.defaultProps = {
+  fireTriggerOnFalse: () => {},
+  fireTriggerOnTrue: () => {},
+};
 
 export default Switch;

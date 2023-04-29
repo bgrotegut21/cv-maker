@@ -1,7 +1,8 @@
 import darkmodeIcon from '../icons/darkmode.svg';
 import lightmodeIcon from '../icons/lightmode.svg';
 import uniqid from 'uniqid';
-import { cloneObject } from './utilities';
+import { cloneObject } from '../scripts/utilities';
+import { getTemplate } from '../scripts/template.js';
 
 import '../styles/Nav.css';
 import '../styles/App.css';
@@ -16,8 +17,9 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      isPreview: true,
-      matches: window.matchMedia('(min-width: 1270px)').matches,
+      isNotPreview: false,
+      isLightMode: false,
+      matches: window.matchMedia('(min-width: 1200px)').matches,
 
       data: {
         Personal_Information: {
@@ -25,6 +27,8 @@ class App extends React.Component {
           array: [
             {
               id: uniqid(),
+              postviewid: uniqid(),
+
               data: {
                 Name: {
                   input: '',
@@ -58,9 +62,12 @@ class App extends React.Component {
 
         Work_Experience: {
           id: uniqid(),
+
           array: [
             {
               id: uniqid(),
+              postviewid: uniqid(),
+
               data: {
                 Title: {
                   input: '',
@@ -94,9 +101,12 @@ class App extends React.Component {
 
         Education: {
           id: uniqid(),
+
           array: [
             {
               id: uniqid(),
+              postviewid: uniqid(),
+
               data: {
                 Degree: {
                   input: '',
@@ -143,92 +153,24 @@ class App extends React.Component {
     this.viewDataState = this.viewDataState.bind(this);
     this.addDataState = this.addDataState.bind(this);
     this.deleteDataState = this.deleteDataState.bind(this);
+    this.setBool = this.setBool.bind(this);
   }
 
   changeTheme() {}
 
   changeView() {}
 
-  getTemplate(title) {
-    if (title === 'Education') {
-      return {
-        id: uniqid(),
-        data: {
-          School_Name: {
-            input: '',
-            isLarge: false,
-            id: uniqid(),
-          },
-          Location: {
-            input: '',
-            isLarge: false,
-            id: uniqid(),
-          },
-          Degree: {
-            input: '',
-            isLarge: false,
-            id: uniqid(),
-          },
-          Start_Date: {
-            input: '',
-            isLarge: false,
-            id: uniqid(),
-          },
-          End_Date: {
-            input: '',
-            isLarge: false,
-            id: uniqid(),
-          },
-          About_Your_Subject: {
-            input: '',
-            isLarge: true,
-            id: uniqid(),
-          },
-        },
-      };
-    }
-
-    return {
-      id: uniqid(),
-      data: {
-        Title: {
-          input: '',
-          isLarge: false,
-          id: uniqid(),
-        },
-        Company: {
-          input: '',
-          isLarge: false,
-          id: uniqid(),
-        },
-        Start_Date: {
-          input: '',
-          isLarge: false,
-          id: uniqid(),
-        },
-        End_Date: {
-          input: '',
-          isLarge: false,
-          id: uniqid(),
-        },
-        About_Your_Role: {
-          input: '',
-          isLarge: true,
-          id: uniqid(),
-        },
-      },
-    };
-  }
-
   watchMedia(event) {
     this.setState({ matches: event.matches }, () => {
-      // console.log(this.state, 'this state');
+      if (this.state.matches) {
+        this.setBool('isNotPreview', false)();
+      }
     });
   }
 
   componentDidMount() {
     window
-      .matchMedia('(min-width: 1270px)')
+      .matchMedia('(min-width: 1200px)')
       .addEventListener('change', this.watchMedia);
   }
 
@@ -236,21 +178,14 @@ class App extends React.Component {
 
   changeDataState(dataTitle, index, dataKey, tag) {
     function changeValue(event) {
+      const clonedState = cloneObject(this.state);
       const data = cloneObject(this.state.data);
 
       data[dataTitle]['array'][index]['data'][dataKey][tag] =
         event.target.value;
 
-      this.setState(
-        {
-          isPreview: this.state.isPreview,
-          matches: window.matchMedia('(min-width: 1270px)').matches,
-          data: data,
-        },
-        () => {
-          // console.log(this.state, 'this dot state ');
-        }
-      );
+      clonedState.data = data;
+      this.setState(clonedState);
     }
 
     const BindChangeValue = changeValue.bind(this);
@@ -258,19 +193,14 @@ class App extends React.Component {
   }
 
   addDataState(dataTitle) {
-    let dataTemplate = this.getTemplate(dataTitle);
-
-    // console.log(dataTemplate, 'the current data template');
+    let dataTemplate = getTemplate(dataTitle);
 
     function addData() {
+      const clonedState = cloneObject(this.state);
       const data = cloneObject(this.state.data);
       data[dataTitle].array = [...data[dataTitle].array, dataTemplate];
-
-      this.setState({
-        isPreview: this.state.isPreview,
-        matches: window.matchMedia('(min-width: 1270px)').matches,
-        data: data,
-      });
+      clonedState.data = data;
+      this.setState(clonedState);
     }
 
     const BindAddData = addData.bind(this);
@@ -279,10 +209,9 @@ class App extends React.Component {
 
   deleteDataState(dataTitle, objectId) {
     function deleteData() {
+      const clonedState = cloneObject(this.state);
       const data = cloneObject(this.state.data);
       const dataObject = data[dataTitle];
-
-      // console.log(objectId, 'the object id');
 
       const updatedData = dataObject.array.filter(
         (item) => item.id !== objectId
@@ -290,17 +219,9 @@ class App extends React.Component {
 
       dataObject.array = updatedData;
 
-      this.setState(
-        {
-          isPreview: this.state.isPreview,
-          matches: window.matchMedia('(min-width: 1270px)').matches,
-          data: data,
-        },
-        () => {
-          console.log(objectId, 'the object id');
-          console.log(this.state.data, 'this dot state data');
-        }
-      );
+      clonedState.data = data;
+
+      this.setState(clonedState);
     }
 
     const BindDeleteData = deleteData.bind(this);
@@ -308,25 +229,48 @@ class App extends React.Component {
   }
 
   viewDataState(dataTitle, index, dataKey, tag) {
-    // console.log(
-    //   this.state.data[dataTitle]['array'][index]['data'][dataKey][tag]
-    // );
-
     return this.state.data[dataTitle]['array'][index]['data'][dataKey][tag];
+  }
+
+  setBool(datapoint, bool) {
+    function changeBool() {
+      const clonedState = cloneObject(this.state);
+      clonedState[datapoint] = bool;
+      this.setState(clonedState);
+    }
+
+    const bindChangePreview = changeBool.bind(this);
+    return bindChangePreview;
   }
 
   render() {
     const { data } = this.state;
 
+    let mode = '';
+
+    this.state.isLightMode ? (mode = 'Light') : (mode = '');
+
     return (
       <div className="App">
-        <nav className="Navigation">
+        <nav className={`Navigation Navigation-${mode}`}>
           <div className="topNav">
             <div className="themeNav">
-              <img className="icon" src={darkmodeIcon} alt="darkmode" />
+              <img
+                className={`icon icon-${mode}`}
+                src={darkmodeIcon}
+                alt="darkmode"
+              />
 
-              <Switch fireEvent={this.changeTheme} />
-              <img className="icon" src={lightmodeIcon} alt="darkmode" />
+              <Switch
+                fireTriggerOnTrue={this.setBool('isLightMode', true)}
+                fireTriggerOnFalse={this.setBool('isLightMode', false)}
+                lightmodeClassName={mode}
+              />
+              <img
+                className={`icon icon-${mode}`}
+                src={lightmodeIcon}
+                alt="darkmode"
+              />
             </div>
 
             <h1 className="titleText">CV MAKER</h1>
@@ -335,22 +279,35 @@ class App extends React.Component {
           {!this.state.matches && (
             <div className="bottomNav">
               <h2 className="editText">EDIT</h2>
-              <Switch size="large" fireEvent={this.changeView} />
+              <Switch
+                fireTriggerOnTrue={this.setBool('isNotPreview', true)}
+                fireTriggerOnFalse={this.setBool('isNotPreview', false)}
+                size="large"
+                lightmodeClassName={mode}
+              />
               <h2 className="editText"> PREVIEW</h2>
             </div>
           )}
         </nav>
 
-        <div className="View">
-          <Preview
-            data={data}
-            changeDataState={this.changeDataState}
-            viewDataState={this.viewDataState}
-            addDataState={this.addDataState}
-            deleteDataState={this.deleteDataState}
-          />
+        <div className={`View View-${mode}`}>
+          {!this.state.isNotPreview && (
+            <Preview
+              data={data}
+              changeDataState={this.changeDataState}
+              viewDataState={this.viewDataState}
+              addDataState={this.addDataState}
+              deleteDataState={this.deleteDataState}
+              lightmodeClassName={mode}
+            />
+          )}
 
-          <Postview />
+          {this.state.isNotPreview && (
+            <Postview lightmodeClassName={mode} data={data} />
+          )}
+          {this.state.matches && (
+            <Postview lightmodeClassName={mode} data={data} />
+          )}
         </div>
       </div>
     );
