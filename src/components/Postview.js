@@ -4,7 +4,6 @@ import locationIcon from '../icons/location.svg';
 import phoneIcon from '../icons/phone.svg';
 import '../styles/Postview.css';
 
-import uniqid from 'uniqid';
 import ReactToPrint from 'react-to-print';
 
 class Header extends React.Component {
