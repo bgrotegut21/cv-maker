@@ -26,9 +26,9 @@ class Switch extends React.Component {
     const { lightmodeClassName } = this.props;
 
     if (this.nodeRef.current !== null) {
-      if (lightmodeClassName === 'Light')
-        this.nodeRef.current.style.backgroundColor = 'black';
-      else this.nodeRef.current.style.backgroundColor = 'white';
+      if (lightmodeClassName === '')
+        this.nodeRef.current.style.backgroundColor = 'white';
+      else this.nodeRef.current.style.backgroundColor = 'black';
     }
   }
 
@@ -38,7 +38,7 @@ class Switch extends React.Component {
         trigger: false,
       },
       () => {
-        this.props.fireTriggerOnTrue();
+        this.props.fireTriggerOnFalse();
       }
     );
   }
@@ -49,9 +49,17 @@ class Switch extends React.Component {
         trigger: true,
       },
       () => {
-        this.props.fireTriggerOnFalse();
+        this.props.fireTriggerOnTrue();
       }
     );
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.lightmodeClassName !== this.props.lightmodeClassName) {
+      console.log(prevProps, 'previous props');
+      console.log(this.props, 'current props');
+      this.changeLightMode();
+    }
   }
 
   render() {
@@ -66,8 +74,6 @@ class Switch extends React.Component {
       switchClassNamesArray[1] = 'switchbuttonlarge';
       switchClassNamesArray[2] = 'switchballLarge';
     }
-
-    this.changeLightMode();
 
     return (
       <div

@@ -262,8 +262,8 @@ class App extends React.Component {
               />
 
               <Switch
-                fireTriggerOnTrue={this.setBool('isLightMode', true)}
-                fireTriggerOnFalse={this.setBool('isLightMode', false)}
+                fireTriggerOnFalse={this.setBool('isLightMode', true)}
+                fireTriggerOnTrue={this.setBool('isLightMode', false)}
                 lightmodeClassName={mode}
               />
               <img
@@ -280,8 +280,8 @@ class App extends React.Component {
             <div className="bottomNav">
               <h2 className="editText">EDIT</h2>
               <Switch
-                fireTriggerOnTrue={this.setBool('isNotPreview', true)}
-                fireTriggerOnFalse={this.setBool('isNotPreview', false)}
+                fireTriggerOnFalse={this.setBool('isNotPreview', true)}
+                fireTriggerOnTrue={this.setBool('isNotPreview', false)}
                 size="large"
                 lightmodeClassName={mode}
               />
