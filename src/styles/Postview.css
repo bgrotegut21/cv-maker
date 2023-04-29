@@ -25,7 +25,6 @@
 }
 
 .header {
-  /* background: red; */
   margin-right: 40px;
   margin-left: 40px;
   margin-top: 40px;
@@ -60,14 +59,12 @@
 
 .head {
   display: flex;
-  /* background: violet; */
   justify-content: space-between;
   text-align: left;
   flex-direction: row;
 }
 
 .resumeIcons {
-  /* background: yellow; */
   width: 150px;
 }
 
@@ -75,11 +72,9 @@
   width: 30px;
   height: 30px;
   margin: 5px;
-  /* background: blue; */
 }
 
 .resumeIcon {
-  /* background: pink; */
   align-items: center;
   display: flex;
 }
