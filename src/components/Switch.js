@@ -56,10 +56,12 @@ class Switch extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.lightmodeClassName !== this.props.lightmodeClassName) {
-      console.log(prevProps, 'previous props');
-      console.log(this.props, 'current props');
       this.changeLightMode();
     }
+  }
+
+  componentDidMount() {
+    this.changeLightMode();
   }
 
   render() {
